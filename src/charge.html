@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="css/rasp.css">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Power Charging Status</title>
+    </head>
+    <body>
+      <header>
+            <pre><h1 class="text-center"> <a id="headera" href="index.html"> PhonyChain</a></h1></pre>
+        </header>
+    <div class="header"> <span id="sun">PhonyChain</span> <hr> </div>
+
+    <div class="main1" style="text-align: center;">
+<h1>Power Charging Status</h1>
+<input type="button" id = "relay" value = "ON">&emsp;
+<input type="button" id = "relay2" value = "OFF">  
+</div>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
+<script>
+let mytoken=0;
+
+
+$(document).ready(function(){
+                function test(){
+                    $.getJSON('http://localhost:3000/test', function(data){
+                        mytoken = data;
+                    })
+                }
+                test();
+              });
+
+var socket = io('192.168.137.13:8080'); //load socket.io-client and connect to the host(raspberry pi ip) that serves the page
+
+window.addEventListener("load", function(){ //when page loads
+  
+
+  socket.emit("autorelay", 1);
+  
+  var relaybutton = document.getElementById("relay"); 
+  var relaybutton2 = document.getElementById("relay2");
+    
+  relaybutton.addEventListener("click", function() { //add event listener for when checkbox changes    
+    socket.emit("token" , mytoken);
+    socket.emit("relay", 0); //send button status to server (as 1 or 0)
+      
+  });
+  
+  relaybutton2.addEventListener("click", function() { //add event listener for when checkbox changes    
+      socket.emit("relay", 1); //send button status to server (as 1 or 0)
+  });
+
+ 
+  
+});
+
+socket.on('relay', function (data) { //get button status from client
+  document.getElementById("relay").checked = data; //change checkbox according to push button on Raspberry Pi
+  socket.emit("relay", data); //send push button status to back to server
+});
+
+
+</script>
+
+</html>
+</body>
+</html>

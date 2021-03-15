@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link type="text/css" rel="stylesheet" href="css/pstyle.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PhonyChain</title>
+  </head>
+  <body>
+    <header>
+          <pre><h1 class="text-center"> <a id="headera" href="index.html"> PhonyChain</a></h1></pre>
+      </header>
+     
+      <div class="main1">
+     <form style="text-align: center;" id="form1">
+         <fieldset>
+             <legend style=" position: relative;  font-size: 1.2em;">Phone Charge</legend>
+        <br><br>
+            <!-- <select name="port" id="ports">
+            <option value="1">port 1</option>
+            <option value="2">port 2</option>
+        </select><br><br> -->
+        <input type="number" id="token" placeholder="Charging_Amount" name="token"><br> <br>
+        
+      </fieldset>
+
+    </form>
+    <button type="submit" value="buy" class="btn-buy">buy</button>
+   <!-- <button type="button" value="Charge" onclick="go()"id="go">charge</button>  
+    -->
+    </div>
+
+    
+
+    <script>     
+  
+
+       let buytoken;
+       let p;
+       p = document.getElementById("ports").value;
+       let chargepage=0;
+       let f = document.getElementById("form1");
+      
+       function go(){
+        if(chargepage == 1){
+          alert("토큰 충전에 성공했습니다.");
+          
+          chargepage = 0;
+          
+        }
+      }
+     
+  
+    </script>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+     <!-- Include all compiled plugins (below), or include individual files as needed -->
+     <script src="js/jquery.min.js"></script>
+     <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  
+    
+  </body>
+</html>
